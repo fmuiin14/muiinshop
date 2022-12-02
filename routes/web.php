@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\FrontendController;
 
 /*
@@ -15,12 +15,19 @@ use App\Http\Controllers\FrontendController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::get('/', [FrontendController::class, 'index'])->name('homefe');
 
-Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// Dashboard User
+Route::middleware(['auth'])->group(function () {
+    Route::get('/user', [UserController::class, 'index'])->name('user-index');
+});
+
+
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Auth::routes();

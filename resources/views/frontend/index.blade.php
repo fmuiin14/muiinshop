@@ -107,6 +107,28 @@
 							<li>
 								<a href="contact.html">Contact</a>
 							</li>
+							<li>
+                                @if (Auth::check())
+                                <a href="{{ route('user-index') }}">Home</a>
+                                @else
+                                <a href="{{ route('login') }}">Login</a>
+                                @endif
+							</li>
+							<li>
+                                @if (Auth::check())
+                                <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                @else
+                                @endif
+								{{-- <a href="contact.html">Contact</a> --}}
+							</li>
 						</ul>
 					</div>
 
