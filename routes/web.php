@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,13 @@ Route::get('/', [FrontendController::class, 'index'])->name('homefe');
 
 // Dashboard User
 Route::middleware(['auth'])->group(function () {
-    Route::get('/user', [UserController::class, 'index'])->name('user-index');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('user-index');
 });
 
+// Dashboard Admin
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/user', [UserController::class, 'index'])->name('admin-user-index');
+});
 
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
 // Route::get('/', function () {
