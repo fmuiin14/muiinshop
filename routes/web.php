@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,12 +28,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Dashboard Admin
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/user', [UserController::class, 'index'])->name('admin-user-index');
+Route::group(['prefix' => 'admin','middleware' => (['auth', 'role:admin'])], function() {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin-dashboard-index');
+    // Route::get('/user', [UserController::class, 'index'])->name('admin-user-index');
 });
 
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 Auth::routes();
