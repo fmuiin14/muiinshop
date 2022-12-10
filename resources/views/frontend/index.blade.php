@@ -53,17 +53,28 @@
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+                        @if (Auth::check())
+                    <a href="{{ route('user-dashboard') }}" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
+                                @else
+                                <a href="{{ route('login') }}" class="flex-c-m trans-04 p-lr-25">Login</a>
+                                @endif
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
-						</a>
+                                @if (Auth::check())
+                                <a href="{{ route('logout') }}" class="flex-c-m trans-04 p-lr-25"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                @else
+                                @endif
+
+
 					</div>
 				</div>
 			</div>
@@ -106,13 +117,6 @@
 
 							<li>
 								<a href="contact.html">Contact</a>
-							</li>
-							<li>
-                                @if (Auth::check())
-                                <a href="{{ route('user-index') }}">Home</a>
-                                @else
-                                <a href="{{ route('login') }}">Login</a>
-                                @endif
 							</li>
 							<li>
                                 @if (Auth::check())
@@ -196,9 +200,13 @@
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
+                        @if (Auth::check())
+                        <a href="{{ route('user-dashboard') }}" class="flex-c-m p-lr-10 trans-04">
 							My Account
 						</a>
+                                @else
+                                <a href="{{ route('login') }}" class="flex-c-m p-lr-10 trans-04">Login</a>
+                                @endif
 
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
 							EN

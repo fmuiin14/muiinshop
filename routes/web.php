@@ -24,7 +24,7 @@ Route::get('/', [FrontendController::class, 'index'])->name('homefe');
 
 // Dashboard User
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [HomeController::class, 'index'])->name('user-index');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('user-dashboard');
 });
 
 // Dashboard Admin

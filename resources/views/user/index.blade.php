@@ -253,14 +253,14 @@
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="#">User</a>
+            <a href="{{ route('homefe') }}">SHOP</a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
-            <a href="#">#</a>
+            <a href="{{ route('homefe') }}">SHOP</a>
           </div>
           <ul class="sidebar-menu">
             <li><a class="nav-link" href="credits.html"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
-            <li><a class="nav-link" href="credits.html"><i class="far fa-file-alt"></i> <span>Transactions</span></a></li>
+            <li><a class="nav-link" href="credits.html"><i class="far fa-file-alt"></i> <span>Orders</span></a></li>
           </ul>
 
           </aside>
