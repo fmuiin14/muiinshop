@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,7 +18,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin.product.index');
+        $products = Product::all();
+        return view('admin.product.index', compact('products'));
     }
 
     /**
@@ -112,6 +114,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Product::findOrFail($id);
+        Storage::delete('public/'.$item->image);
+        $item->delete();
+
+        return redirect()->route('product.index')->with('success', 'Data Berhasil Dihapus!');
     }
 }
