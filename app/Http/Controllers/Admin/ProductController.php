@@ -91,7 +91,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $products = Product::findOrFail($id);
+        return view('admin.product.edit', compact('products'));
     }
 
     /**
@@ -103,7 +104,39 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'price' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors())->withInput();
+        }
+
+        $products = Product::findOrFail($id);
+
+        $products->update([
+            'title' => $request->title,
+            'slug' => Str::slug($request->title),
+            'summary' => $request->summary,
+            'description' => $request->description,
+            'stock' => $request->stock,
+            'price' => $request->price,
+            'slug' => Str::slug($request->name)
+        ]);
+
+        if ($request->hasFile('image')) {
+            $image_path = $request->file('image')->store('products', 'public');
+
+            //delete old image
+            Storage::delete('public/'.$products->image);
+
+            $products->update([
+                'image'     => $image_path
+            ]);
+        }
+
+        return redirect()->route('products.index')->with('success', 'Data Berhasil Diupdate!');
     }
 
     /**

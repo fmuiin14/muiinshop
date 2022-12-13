@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group">
                     <label>Size</label>
-                    <select name="category_id" class="form-control">
+                    <select name="size" class="form-control">
                         <option value="">#</option>
                     </select>
                 </div>
