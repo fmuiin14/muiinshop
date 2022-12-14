@@ -76,8 +76,8 @@
                             <div class="form-group mb-0">
                                 <label for="">Photo</label>
                                 <br>
-                                @if ($products->image != '')
-                                    <img src="{{ Storage::url('public/') . $products->image }}" class="rounded"
+                                @if ($products->photo != '')
+                                    <img src="{{ Storage::url('public/') . $products->photo }}" class="rounded"
                                         style="width: 150px">
                                 @endif
                                 <br>

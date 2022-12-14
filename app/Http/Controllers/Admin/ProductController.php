@@ -121,8 +121,7 @@ class ProductController extends Controller
             'summary' => $request->summary,
             'description' => $request->description,
             'stock' => $request->stock,
-            'price' => $request->price,
-            'slug' => Str::slug($request->name)
+            'price' => $request->price
         ]);
 
         if ($request->hasFile('image')) {
