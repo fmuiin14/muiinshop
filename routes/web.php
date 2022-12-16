@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -34,7 +35,7 @@ Route::group(['prefix' => 'admin','middleware' => (['auth', 'role:admin'])], fun
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin-dashboard-index');
     Route::resource('product', ProductController::class);
     Route::resource('category', CategoryController::class);
-    Route::resource('coupon', CategoryController::class);
+    Route::resource('coupon', CouponController::class);
     // Route::get('/user', [UserController::class, 'index'])->name('admin-user-index');
 });
 
