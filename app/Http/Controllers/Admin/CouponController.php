@@ -51,6 +51,7 @@ class CouponController extends Controller
             'code' => $request->code,
             'type' => $request->type,
             'value' => $request->value,
+            'valuejumlah' => $request->valuejumlah,
             'status' => 'active'
         ]);
 
@@ -103,11 +104,12 @@ class CouponController extends Controller
             'code' => $request->code,
             'type' => $request->type,
             'value' => $request->value,
+            'valuejumlah' => $request->valuejumlah,
             'status' => $request->status,
         ]);
 
 
-        return redirect()->route('category.index')->with('success', 'Data Berhasil Diupdate!');
+        return redirect()->route('coupon.index')->with('success', 'Data Berhasil Diupdate!');
     }
 
     /**

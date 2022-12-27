@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('code')->nullable();
             $table->enum('type',['fixed','percent'])->nullable();
-            $table->decimal('value',20,2)->nullable();
+            $table->double('value')->nullable();
+            $table->double('valuejumlah')->nullable();
             $table->enum('status',['active','inactive'])->default('inactive');
             $table->timestamps();
         });
