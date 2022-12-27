@@ -50,7 +50,8 @@ class CategoryController extends Controller
 
         Category::create([
             'title' => strtolower($request->title),
-            'slug' => Str::slug($request->title)
+            'slug' => Str::slug($request->title),
+            'status' => 'active'
         ]);
 
         return redirect()->route('category.create')->with('success', 'Data Berhasil Disimpan!');

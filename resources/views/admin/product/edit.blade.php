@@ -32,17 +32,33 @@
                                 <input type="text" class="form-control" name="title" required
                                     value="{{ $products->title }}">
                             </div>
+
                             <div class="form-group">
-                                <label>Size</label>
-                                <select name="size" class="form-control">
-                                    <option value="">#</option>
-                                </select>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Size</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="s"
+                                        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+                                        placeholder="S" value="{{ $size->s }}">
+                                    <input type="text" class="form-control" name="m"
+                                        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+                                        placeholder="M" value="{{ $size->m }}">
+                                    <input type="text" class="form-control" name="l"
+                                        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+                                        placeholder="L" value="{{ $size->l }}">
+                                    <input type="text" class="form-control" name="xl"
+                                        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+                                        placeholder="XL" value="{{ $size->xl }}">
+                                    <input type="text" class="form-control" name="xxl"
+                                        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+                                        placeholder="XXL" value="{{ $size->xxl }}">
+                                    <input type="text" class="form-control" name="allsize"
+                                        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+                                        placeholder="Allsize" value="{{ $size->allsize }}">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Stok</label>
-                                <input type="text" class="form-control" name="stock" required
-                                    value="{{ $products->stock }}">
-                            </div>
+
                             <div class="form-group">
                                 <label>Summary</label>
                                 <textarea name="summary" class="form-control">{{ $products->summary }}</textarea>
@@ -59,18 +75,26 @@
                             <div class="form-group">
                                 <label>Harga Diskon</label>
                                 <input type="text" class="form-control" name="discount" required
-                                    value="{{ $products->discount }}">
+                                    value="{{ $products->discount_price }}">
                             </div>
                             <div class="form-group">
                                 <label>Kategori</label>
                                 <select name="category_id" class="form-control">
-                                    <option value="">#</option>
+                                    @foreach ($category as $val)
+                                        <option value="{{ $val->id }}" @if ($products->category_id == $val->id)
+                                            selected
+                                        @endif>{{ $val->title }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Brand</label>
                                 <select name="brand_id" class="form-control">
-                                    <option value="">#</option>
+                                    @foreach ($brand as $val)
+                                        <option value="{{ $val->id }}" @if ($products->brand_id == $val->id)
+                                            selected
+                                        @endif>{{ $val->title }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group mb-0">

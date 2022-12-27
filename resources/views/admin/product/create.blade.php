@@ -62,10 +62,6 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="form-group">
-                    <label>Stok</label>
-                    <input type="text" class="form-control" name="stock" required>
-                </div> --}}
 
                             <div class="form-group">
                                 <label>Summary</label>

@@ -111,7 +111,10 @@ class ProductController extends Controller
     public function edit($id)
     {
         $products = Product::findOrFail($id);
-        return view('admin.product.edit', compact('products'));
+        $category = Category::all();
+        $brand = Brand::all();
+        $size = SizeAvailableProduct::where('product_id', '=', $id)->first();
+        return view('admin.product.edit', compact('products', 'category', 'brand', 'size'));
     }
 
     /**
@@ -168,6 +171,8 @@ class ProductController extends Controller
         $item = Product::findOrFail($id);
         Storage::delete('public/'.$item->image);
         $item->delete();
+
+        SizeAvailableProduct::where('product_id',$id)->delete();
 
         return redirect()->route('product.index')->with('success', 'Data Berhasil Dihapus!');
     }
