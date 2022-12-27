@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Brand;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use App\Models\SizeAvailableProduct;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -29,7 +32,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+        $category = Category::all();
+        $brand = Brand::all();
+        return view('admin.product.create', compact('category', 'brand'));
     }
 
     /**
@@ -40,6 +45,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
+
         $validator = Validator::make($request->all(), [
             'title' => 'required'
         ]);
@@ -53,20 +60,32 @@ class ProductController extends Controller
             $image_path = $request->file('photo')->store('products', 'public');
         }
 
-        Product::create([
+        $produk = Product::create([
             'title' => $request->title,
             'slug' => Str::slug($request->title),
             'summary' => $request->summary,
             'description' => $request->description,
             'photo' => $image_path,
-            'stock' => $request->stock,
-            'size' => $request->size,
-            'condition' => $request->condition,
-            'status' => 'show',
+            // 'stock' => $request->stock,
+            // 'size' => $request->size,
             'price' => $request->price,
-            'discount' => $request->discount,
+            'discount_price' => $request->discount_price,
+            // 'condition' => $request->condition,
+            'status' => 'show',
             'category_id' => $request->category_id,
             'brand_id' => $request->brand_id,
+        ]);
+
+
+        SizeAvailableProduct::create([
+            'product_id' => $produk->id,
+            's' => $request->s,
+            'm' => $request->m,
+            'l' => $request->l,
+            'xl' => $request->xl,
+            'xxl' => $request->xxl,
+            'allsize' => $request->allsize
+
         ]);
 
         return redirect()->route('product.create')->with('success', 'Data Berhasil Disimpan!');

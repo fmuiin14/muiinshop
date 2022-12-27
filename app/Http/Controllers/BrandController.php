@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Brand;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class CategoryController extends Controller
+class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::all();
-        return view('admin.category.index', compact('category'));
+        $brand = Brand::all();
+        return view('admin.brand.index', compact('brand'));
     }
 
     /**
@@ -28,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        return view('admin.brand.create');
     }
 
     /**
@@ -48,12 +47,12 @@ class CategoryController extends Controller
         }
 
 
-        Category::create([
-            'title' => strtolower($request->title),
-            'slug' => Str::slug($request->title)
+        Brand::create([
+            'title' => $request->title,
+            'slug' => Str::slug($request->title),
         ]);
 
-        return redirect()->route('category.create')->with('success', 'Data Berhasil Disimpan!');
+        return redirect()->route('brand.create')->with('success', 'Data Berhasil Disimpan!');
     }
 
     /**
@@ -75,8 +74,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
-        return view('admin.category.edit', compact('category'));
+        $brand = Brand::findOrFail($id);
+        return view('admin.brand.edit', compact('brand'));
     }
 
     /**
@@ -96,15 +95,16 @@ class CategoryController extends Controller
             return back()->withErrors($validator->errors())->withInput();
         }
 
-        $categories = Category::findOrFail($id);
+        $brand = Brand::findOrFail($id);
 
-        $categories->update([
+        $brand->update([
             'title' => $request->title,
-            'slug' => Str::slug($request->title)
+            'slug' => Str::slug($request->title),
+            'status' => $request->status,
         ]);
 
 
-        return redirect()->route('category.index')->with('success', 'Data Berhasil Diupdate!');
+        return redirect()->route('brand.index')->with('success', 'Data Berhasil Diupdate!');
     }
 
     /**
@@ -115,9 +115,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $item = Category::findOrFail($id);
+        $item = Brand::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('category.index')->with('success', 'Data Berhasil Dihapus!');
+        return redirect()->route('brand.index')->with('success', 'Data Berhasil Dihapus!');
     }
 }

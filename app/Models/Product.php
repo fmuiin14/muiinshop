@@ -20,7 +20,7 @@ class Product extends Model
         'condition',
         'status',
         'price',
-        'discount',
+        'discount_price',
         'category_id',
         'brand_id'
     ];

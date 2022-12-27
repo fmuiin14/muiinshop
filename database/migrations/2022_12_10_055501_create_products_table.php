@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('size')->nullable();
             $table->string('condition')->nullable();
             $table->string('status')->nullable();
-            $table->double('price', 8, 2)->nullable();
-            $table->double('discount', 8, 2)->nullable();
+            $table->double('price')->nullable();
+            $table->double('discount_price')->nullable();
             $table->string('category_id')->nullable();
             $table->string('brand_id')->nullable();
             $table->timestamps();
