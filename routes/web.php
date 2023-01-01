@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\BrandController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -40,6 +41,7 @@ Route::group(['prefix' => 'admin','middleware' => (['auth', 'role:admin'])], fun
     Route::resource('coupon', CouponController::class);
     Route::resource('order', OrderController::class);
     Route::resource('brand', BrandController::class);
+    Route::resource('slider', SliderController::class);
     // Route::get('/user', [UserController::class, 'index'])->name('admin-user-index');
 });
 

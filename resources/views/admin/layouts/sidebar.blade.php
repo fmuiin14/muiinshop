@@ -11,6 +11,7 @@
       <li><a class="nav-link" href="{{ route('category.index') }}"><i class="far fa-file-alt"></i> <span>Category</span></a></li>
       <li><a class="nav-link" href="{{ route('coupon.index') }}"><i class="far fa-file-alt"></i> <span>Coupons</span></a></li>
       <li><a class="nav-link" href="{{ route('brand.index') }}"><i class="far fa-file-alt"></i> <span>Brands</span></a></li>
+      <li><a class="nav-link" href="{{ route('slider.index') }}"><i class="far fa-file-alt"></i> <span>Slider</span></a></li>
       <li><a class="nav-link" href="#"><i class="far fa-file-alt"></i> <span>Media Manager*</span></a></li>
       <li><a class="nav-link" href="#"><i class="far fa-file-alt"></i> <span>Banners*</span></a></li>
       <li><a class="nav-link" href="#"><i class="far fa-file-alt"></i> <span>Shipping*</span></a></li>

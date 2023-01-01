@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+
 class FrontendController extends Controller
 {
     public function index() {
-        return view('frontend.index');
+        $brand = Brand::all();
+        return view('frontend.index', compact('brand'));
     }
 }

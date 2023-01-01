@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Brand;
+use App\Models\Slider;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class BrandController extends Controller
+class SliderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +17,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brand = Brand::all();
-        return view('admin.brand.index', compact('brand'));
+        $slider = Slider::all();
+        return view('admin.slider.index', compact('slider'));
     }
 
     /**
@@ -27,7 +28,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('admin.brand.create');
+        return view('admin.slider.create');
     }
 
     /**
@@ -47,12 +48,12 @@ class BrandController extends Controller
         }
 
 
-        Brand::create([
+        Slider::create([
             'title' => $request->title,
             'slug' => Str::slug($request->title),
         ]);
 
-        return redirect()->route('brand.create')->with('success', 'Data Berhasil Disimpan!');
+        return redirect()->route('slider.create')->with('success', 'Data Berhasil Disimpan!');
     }
 
     /**
@@ -74,8 +75,8 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        $brand = Brand::findOrFail($id);
-        return view('admin.brand.edit', compact('brand'));
+        $slider = Slider::findOrFail($id);
+        return view('admin.slider.edit', compact('slider'));
     }
 
     /**
@@ -95,16 +96,16 @@ class BrandController extends Controller
             return back()->withErrors($validator->errors())->withInput();
         }
 
-        $brand = Brand::findOrFail($id);
+        $slider = Slider::findOrFail($id);
 
-        $brand->update([
+        $slider->update([
             'title' => $request->title,
             'slug' => Str::slug($request->title),
             'status' => $request->status,
         ]);
 
 
-        return redirect()->route('brand.index')->with('success', 'Data Berhasil Diupdate!');
+        return redirect()->route('slider.index')->with('success', 'Data Berhasil Diupdate!');
     }
 
     /**
@@ -115,9 +116,9 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        $item = Brand::findOrFail($id);
+        $item = Slider::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('brand.index')->with('success', 'Data Berhasil Dihapus!');
+        return redirect()->route('slider.index')->with('success', 'Data Berhasil Dihapus!');
     }
 }
