@@ -6,6 +6,7 @@ use App\Models\Brand;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class BrandController extends Controller
@@ -47,9 +48,18 @@ class BrandController extends Controller
             return back()->withErrors($validator->errors())->withInput();
         }
 
+        $image_path = '';
+        if ($request->hasFile('photo')) {
+            $image_path = $request->file('photo')->store('brands', 'public');
+        }
+
 
         Brand::create([
             'title' => $request->title,
+            'label1' => $request->label1,
+            'label2' => $request->label2,
+            'label3' => $request->label3,
+            'photo' => $image_path,
             'slug' => Str::slug($request->title),
         ]);
 
@@ -100,9 +110,23 @@ class BrandController extends Controller
 
         $brand->update([
             'title' => $request->title,
+            'label1' => $request->label1,
+            'label2' => $request->label2,
+            'label3' => $request->label3,
             'slug' => Str::slug($request->title),
             'status' => $request->status,
         ]);
+
+        if ($request->hasFile('photo')) {
+            $image_path = $request->file('photo')->store('brands', 'public');
+
+            //delete old image
+            Storage::delete('public/'.$brand->photo);
+
+            $brand->update([
+                'photo'     => $image_path
+            ]);
+        }
 
 
         return redirect()->route('brand.index')->with('success', 'Data Berhasil Diupdate!');
@@ -117,6 +141,7 @@ class BrandController extends Controller
     public function destroy($id)
     {
         $item = Brand::findOrFail($id);
+        Storage::delete('public/'.$item->photo);
         $item->delete();
 
         return redirect()->route('brand.index')->with('success', 'Data Berhasil Dihapus!');

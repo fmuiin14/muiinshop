@@ -23,6 +23,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Brand</th>
+                                        <th>Gambar</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -35,6 +36,7 @@
                                         <tr>
                                             <td><?= $no++ ?></td>
                                             <td>{{ $val->title }}</td>
+                                            <td><img src="{{ Storage::url('public/').$val->photo }}" class="rounded" style="width: 100px"></td>
                                             <td>{{ $val->status }}</td>
                                             <td>
                                                 <form onsubmit="return confirm('Are you sure?')" action="{{ route('brand.destroy', $val->id) }}" method="POST">

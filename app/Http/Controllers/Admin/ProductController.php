@@ -45,8 +45,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-
         $validator = Validator::make($request->all(), [
             'title' => 'required'
         ]);
@@ -66,11 +64,8 @@ class ProductController extends Controller
             'summary' => $request->summary,
             'description' => $request->description,
             'photo' => $image_path,
-            // 'stock' => $request->stock,
-            // 'size' => $request->size,
             'price' => $request->price,
             'discount_price' => $request->discount_price,
-            // 'condition' => $request->condition,
             'status' => 'show',
             'category_id' => $request->category_id,
             'brand_id' => $request->brand_id,
@@ -146,11 +141,11 @@ class ProductController extends Controller
             'price' => $request->price
         ]);
 
-        if ($request->hasFile('image')) {
-            $image_path = $request->file('image')->store('products', 'public');
+        if ($request->hasFile('photo')) {
+            $image_path = $request->file('photo')->store('products', 'public');
 
             //delete old image
-            Storage::delete('public/'.$products->image);
+            Storage::delete('public/'.$products->photo);
 
             $products->update([
                 'image'     => $image_path

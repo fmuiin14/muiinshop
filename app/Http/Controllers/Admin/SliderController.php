@@ -6,6 +6,7 @@ use App\Models\Slider;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class SliderController extends Controller
@@ -47,9 +48,17 @@ class SliderController extends Controller
             return back()->withErrors($validator->errors())->withInput();
         }
 
+        $image_path = '';
+        if ($request->hasFile('photo')) {
+            $image_path = $request->file('photo')->store('sliders', 'public');
+        }
 
         Slider::create([
             'title' => $request->title,
+            'label1' => $request->label1,
+            'label2' => $request->label2,
+            'label3' => $request->label3,
+            'photo' => $image_path,
             'slug' => Str::slug($request->title),
         ]);
 
@@ -88,6 +97,7 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request);
         $validator = Validator::make($request->all(), [
             'title' => 'required'
         ]);
@@ -100,9 +110,23 @@ class SliderController extends Controller
 
         $slider->update([
             'title' => $request->title,
+            'label1' => $request->label1,
+            'label2' => $request->label2,
+            'label3' => $request->label3,
             'slug' => Str::slug($request->title),
             'status' => $request->status,
         ]);
+
+        if ($request->hasFile('photo')) {
+            $image_path = $request->file('photo')->store('sliders', 'public');
+
+            //delete old image
+            Storage::delete('public/'.$slider->photo);
+
+            $slider->update([
+                'photo'     => $image_path
+            ]);
+        }
 
 
         return redirect()->route('slider.index')->with('success', 'Data Berhasil Diupdate!');
@@ -117,6 +141,7 @@ class SliderController extends Controller
     public function destroy($id)
     {
         $item = Slider::findOrFail($id);
+        Storage::delete('public/'.$item->photo);
         $item->delete();
 
         return redirect()->route('slider.index')->with('success', 'Data Berhasil Dihapus!');

@@ -29,7 +29,19 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Judul</label>
-                                <input type="text" class="form-control" name="code" required value="{{ $slider->title }}">
+                                <input type="text" class="form-control" name="title" required value="{{ $slider->title }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Label 1</label>
+                                <input type="text" class="form-control" name="label1" required value="{{ $slider->label1 }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Label 2</label>
+                                <input type="text" class="form-control" name="label2" required value="{{ $slider->label2 }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Label 3</label>
+                                <input type="text" class="form-control" name="label3" required value="{{ $slider->label3 }}">
                             </div>
 
                             <div class="form-group">
@@ -42,6 +54,18 @@
                                         selected
                                     @endif>Tidak Aktif</option>
                                   </select>
+                            </div>
+
+                            <div class="form-group mb-0">
+                                <label for="">Photo</label>
+                                <br>
+                                @if ($slider->photo != '')
+                                    <img src="{{ Storage::url('public/') . $slider->photo }}" class="rounded"
+                                        style="width: 150px">
+                                @endif
+                                <br>
+                                <small>*Ignore if you don't want to change the image</small>
+                                <input type="file" class="form-control" name="photo" required>
                             </div>
 
                         </div>

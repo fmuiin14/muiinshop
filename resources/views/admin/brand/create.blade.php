@@ -30,6 +30,23 @@
                                 <label>Judul</label>
                                 <input type="text" class="form-control" name="title" required>
                             </div>
+                            <div class="form-group">
+                                <label>Label 1</label>
+                                <input type="text" class="form-control" name="label1" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Label 2</label>
+                                <input type="text" class="form-control" name="label2" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Label 3</label>
+                                <input type="text" class="form-control" name="label3" required>
+                            </div>
+
+                            <div class="form-group mb-0">
+                                <label for="">Photo</label>
+                                <input type="file" class="form-control" name="photo" required>
+                            </div>
 
 
                         </div>
