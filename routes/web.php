@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\DashboardController;
 
 
 Route::get('/', [FrontendController::class, 'index'])->name('homefe');
+Route::get('/product/{slug}/{id}', [ProductController::class, 'detail']);
 
 
 
@@ -43,6 +44,7 @@ Route::group(['prefix' => 'admin','middleware' => (['auth', 'role:admin'])], fun
     Route::resource('brand', BrandController::class);
     Route::resource('slider', SliderController::class);
     // Route::get('/user', [UserController::class, 'index'])->name('admin-user-index');
+
 });
 
 Auth::routes();

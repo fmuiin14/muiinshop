@@ -171,4 +171,12 @@ class ProductController extends Controller
 
         return redirect()->route('product.index')->with('success', 'Data Berhasil Dihapus!');
     }
+
+    public function detail ($slug, $id)
+    {
+        $brand = Brand::all();
+        $product = Product::where('id', '=', $id)->first();
+        $related = Product::take(4)->get();
+        return view('frontend.productDetail', compact('product', 'brand', 'related'));
+    }
 }
