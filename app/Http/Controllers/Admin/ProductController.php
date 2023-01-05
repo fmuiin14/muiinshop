@@ -176,7 +176,8 @@ class ProductController extends Controller
     {
         $brand = Brand::all();
         $product = Product::where('id', '=', $id)->first();
+        $size = SizeAvailableProduct::where('product_id', '=', $id)->first();
         $related = Product::take(4)->get();
-        return view('frontend.productDetail', compact('product', 'brand', 'related'));
+        return view('frontend.productDetail', compact('product', 'brand', 'related', 'size'));
     }
 }
