@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Admin\UserController;
@@ -32,6 +33,9 @@ Route::get('/product/{slug}/{id}', [ProductController::class, 'detail']);
 // Dashboard User
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('user-dashboard');
+
+    // Cart
+    Route::get('/add-to-cart/{slug}',[CartController::class, 'addToCart'])->name('add-to-cart');
 });
 
 // Dashboard Admin
