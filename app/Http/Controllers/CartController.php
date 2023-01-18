@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Brand;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $brand = Brand::all();
+        return view('frontend.cart', compact('brand'));
     }
 
     /**
