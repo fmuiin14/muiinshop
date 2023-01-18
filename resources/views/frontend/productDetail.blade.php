@@ -80,6 +80,8 @@
                             {{ $product->summary }}
                         </p>
 
+                        <form onsubmit="return showNotif()" action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
                         <div class="p-t-33">
                             <div class="flex-w flex-r-m p-b-10">
                                 <div class="size-203 flex-c-m respon6">
@@ -88,7 +90,7 @@
 
                                 <div class="size-204 respon6-next">
                                     <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
+                                        <select class="js-select2" id="ukuranPilihan" name="size">
                                             <option disabled selected>Pilih Ukuran</option>
                                             <option @if ($size->s == '' || $size->s == 0) disabled @endif value="s">Size S
                                             </option>
@@ -108,25 +110,6 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="flex-w flex-r-m p-b-10">
-								<div class="size-203 flex-c-m respon6">
-									Color
-								</div>
-
-								<div class="size-204 respon6-next">
-									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" name="time">
-											<option>Choose an option</option>
-											<option>Red</option>
-											<option>Blue</option>
-											<option>White</option>
-											<option>Grey</option>
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div>
-								</div>
-							</div> --}}
-
                             <div class="flex-w flex-r-m p-b-10">
                                 <div class="size-204 flex-w flex-m respon6-next">
                                     <div class="wrap-num-product flex-w m-r-20 m-tb-10">
@@ -135,21 +118,22 @@
                                         </div>
 
                                         <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                            name="num-product" id="totaljumlah" min="1" max="50" value="1">
+                                            name="quantity" id="totaljumlah" min="1" max="50" value="1">
 
                                         <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                             <i class="fs-16 zmdi zmdi-plus"></i>
                                         </div>
                                     </div>
 
-                                    {{-- <button
-                                        class="">
+                                    <button
+                                        class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" title="Add to cart">
                                         Add to cart
-                                    </button> --}}
-                                    <a class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" title="Add to cart" href="{{route('add-to-cart',$product->slug)}}">Add to cart</a>
+                                    </button>
+                                    {{-- <a class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" title="Add to cart" href="{{route('add-to-cart',$product->slug)}}">Add to cart</a> --}}
                                 </div>
                             </div>
                         </div>
+                        </form>
 
                         <!--  -->
                         <div class="flex-w flex-m p-l-100 p-t-40 respon7">
@@ -373,5 +357,21 @@
             document.getElementById('totaljumlah').value = 50;
         }
     });
+
+    var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
+    var namaProduk = "{{{ $product->title }}}";
+
+    function showNotif() {
+        if (AuthUser == null || AuthUser == '') {
+            alert('Anda harus login/ register terlebih dahulu.');
+            return false;
+        } else if ($("#ukuranPilihan").val() == null || $("#ukuranPilihan").val() == '') {
+            alert('Pilihan ukuran tidak boleh kosong.');
+            return false;
+        } else {
+            swal(namaProduk, "is added to cart !", "success");
+            return true;
+        }
+    }
     </script>
 @endsection

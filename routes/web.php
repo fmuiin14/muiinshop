@@ -35,7 +35,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('user-dashboard');
 
     // Cart
-    Route::get('/add-to-cart/{slug}',[CartController::class, 'addToCart'])->name('add-to-cart');
+    Route::resource('cart', CartController::class);
+    // Route::get('/add-to-cart/{slug}',[CartController::class, 'addToCart'])->name('add-to-cart');
 });
 
 // Dashboard Admin
