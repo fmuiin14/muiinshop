@@ -19,17 +19,25 @@ class CartController extends Controller
      */
     public function index()
     {
-        $user = Auth();
+        $user = Auth::user();
 
         $brand = Brand::all();
-        $order_log = OrderLog::where('user_id', '=', $user->id)
-        ->where('status', '=', 'open')
-        ->latest()->first();
-        $cartproducts = Cart::where('user_id', '=', $user->id)
-        ->where('order_id', '=', $order_log->order_id)
-        ->latest()->get();
+        $cartproducts = Cart::join('order_log', 'order_log.order_id', '=', 'carts.order_id')
+                        ->join('orders', 'orders.id', '=', 'carts.order_id')
+                        ->where('order_log.status', '=', 'open')
+                        ->where('order_log.user_id', '=', $user->id)
+                        ->get()->toArray();;
+        var_dump($cartproducts); die;
+        // var_dump(json_decode($cartproducts)); die;
+        // $datas = json_decode(json_encode($cartproducts), true);
+        // var_dump(json_decode($datas)); die;
 
-        return view('frontend.cart', compact('brand', 'cartproducts'));
+        // foreach ($cartproducts as $val) {
+        //     var_dump($val);
+        //     die;
+        //     }
+
+        return view('frontend.cart', compact('brand'));
     }
 
     /**
