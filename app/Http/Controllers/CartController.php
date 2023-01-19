@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Brand;
 use App\Models\Order;
+use App\Models\OrderLog;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,8 +19,17 @@ class CartController extends Controller
      */
     public function index()
     {
+        $user = Auth();
+
         $brand = Brand::all();
-        return view('frontend.cart', compact('brand'));
+        $order_log = OrderLog::where('user_id', '=', $user->id)
+        ->where('status', '=', 'open')
+        ->latest()->first();
+        $cartproducts = Cart::where('user_id', '=', $user->id)
+        ->where('order_id', '=', $order_log->order_id)
+        ->latest()->get();
+
+        return view('frontend.cart', compact('brand', 'cartproducts'));
     }
 
     /**
@@ -53,52 +63,60 @@ class CartController extends Controller
             return back();
         }
 
-        $latestOrder = Order::orderBy('created_at','DESC')->first();
-        if ($latestOrder == null || $latestOrder == '') {
-            $latestOrder = 0;
-            $order_nr = 'ORD'.str_pad($latestOrder + 1, 8, "0", STR_PAD_LEFT);
+        $latestOrderLog = OrderLog::join('orders', 'orders.id', '=', 'order_log.order_id')
+                            ->where('order_log.status', '=', 'open')->orderBy('order_log.created_at','DESC')->first();
+
+        if ($latestOrderLog == null || $latestOrderLog == '') {
+
+            $latestOrder = Order::where('status', '=', 'open')
+            ->orderBy('created_at','DESC')->first();
+                if ($latestOrder == null || $latestOrder == '') {
+                $latestOrder = 0;
+                $order_nr = 'ORD'.str_pad($latestOrder + 1, 8, "0", STR_PAD_LEFT);
+                } else {
+                $order_nr = 'ORD'.str_pad($latestOrder->id + 1, 8, "0", STR_PAD_LEFT);
+                }
+
+                $order = Order::create([
+                'order_number' => $order_nr,
+                'status' => 'open',
+                'user_id' => $user->id
+                ]);
+
+                $order_log = OrderLog::create([
+                'order_id' => $order->id,
+                'status' => 'open',
+                'user_id' => $user->id
+                ]);
+
+                $cart = Cart::create([
+                    'product_id' => $product->id,
+                    'order_id' => $order->id,
+                    'user_id' => $user->id,
+                    'price' => $request->price,
+                    'quantity' => $request->quantity
+                ]);
+
+                request()->session()->flash('success','Product successfully added to cart');
+                return back();
+
         } else {
-            $order_nr = 'ORD'.str_pad($latestOrder->id + 1, 8, "0", STR_PAD_LEFT);
+            $orderExist = Order::join('order_log', 'order_log.order_id', '=', 'orders.id')
+                            ->where('order_log.status', '=', 'open')->orderBy('orders.created_at','DESC')->first();
+            // dd($orderExist);
+
+            $cartExist = Cart::create([
+                'product_id' => $product->id,
+                'order_id' => $orderExist->id,
+                'user_id' => $user->id,
+                'price' => $request->price,
+                'quantity' => $request->quantity
+            ]);
+
+            request()->session()->flash('success','Product successfully added to cart');
+            return back();
+
         }
-
-        $order = Order::create([
-            'order_number' => $order_nr,
-            'user_id' => $user->id
-        ]);
-
-        $cart = Cart::create([
-            'product_id' => $product->id,
-            'order_id' => $order->id,
-            'user_id' => $user->id,
-            'price' => $user->id,
-            'quantity' => 1,
-        ]);
-
-
-        // $already_cart = Cart::where('user_id', auth()->user()->id)->where('order_id',null)->where('product_id', $product->id)->first();
-        // return $already_cart;
-        // if($already_cart) {
-        //     // dd($already_cart);
-        //     $already_cart->quantity = $already_cart->quantity + 1;
-        //     $already_cart->amount = $product->price+ $already_cart->amount;
-        //     // return $already_cart->quantity;
-        //     if ($already_cart->product->stock < $already_cart->quantity || $already_cart->product->stock <= 0) return back()->with('error','Stock not sufficient!.');
-        //     $already_cart->save();
-
-        // }else{
-
-        //     $cart = new Cart;
-        //     $cart->user_id = auth()->user()->id;
-        //     $cart->product_id = $product->id;
-        //     $cart->price = ($product->price-($product->price*$product->discount)/100);
-        //     $cart->quantity = 1;
-        //     $cart->amount=$cart->price*$cart->quantity;
-        //     if ($cart->product->stock < $cart->quantity || $cart->product->stock <= 0) return back()->with('error','Stock not sufficient!.');
-        //     $cart->save();
-        //     $wishlist=Wishlist::where('user_id',auth()->user()->id)->where('cart_id',null)->update(['cart_id'=>$cart->id]);
-        // }
-        request()->session()->flash('success','Product successfully added to cart');
-        return back();
     }
 
     /**

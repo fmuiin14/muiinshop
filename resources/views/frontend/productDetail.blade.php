@@ -84,6 +84,8 @@
                             @csrf
                         <div class="p-t-33">
                             <div class="flex-w flex-r-m p-b-10">
+                                <input type="hidden" value="{{ $product->slug }}" name="slug">
+                                <input type="hidden" value="{{ $product->price }}" name="price">
                                 <div class="size-203 flex-c-m respon6">
                                     Ukuran
                                 </div>
