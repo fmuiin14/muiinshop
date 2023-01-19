@@ -73,11 +73,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Harga</label>
-                                <input type="text" class="form-control" name="price" required>
+                                <input onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" type="text" class="form-control" name="price" required>
                             </div>
                             <div class="form-group">
                                 <label>Harga Diskon</label>
-                                <input type="text" class="form-control" name="discount_price" required>
+                                <input onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" type="text" class="form-control" name="discount_price" required>
                             </div>
                             <div class="form-group">
                                 <label>Kategori</label>

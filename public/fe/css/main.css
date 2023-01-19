@@ -2704,8 +2704,14 @@ input.num-product::-webkit-inner-spin-button {
 .bor6 {border-right: 1px solid rgba(255,255,255,0.1);}
 
 .bor7 {
-  border: 1px solid #ccc;
+  border: 3px solid #ccc;
   border-radius: 15px;
+}
+
+.active-product {
+    border-color: #07befe;
+    font-weight: bold;
+    color: #07befe;
 }
 
 .bor8 {

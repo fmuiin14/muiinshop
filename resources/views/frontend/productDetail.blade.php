@@ -86,28 +86,51 @@
                             <div class="flex-w flex-r-m p-b-10">
                                 <input type="hidden" value="{{ $product->slug }}" name="slug">
                                 <input type="hidden" value="{{ $product->price }}" name="price">
+
+
+                                {{-- <div class="flex-w flex-t p-t-16">
+                                    <span class="size-216 stext-116 cl8 p-t-4">
+                                        Ukuran
+                                    </span>
+
+                                    <div class="flex-w size-217">
+                                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                            Streetstyle
+                                        </a>
+
+                                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                            Crafts
+                                        </a>
+                                    </div>
+                                </div> --}}
+
                                 <div class="size-203 flex-c-m respon6">
                                     Ukuran
                                 </div>
 
                                 <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" id="ukuranPilihan" name="size">
-                                            <option disabled selected>Pilih Ukuran</option>
-                                            <option @if ($size->s == '' || $size->s == 0) disabled @endif value="s">Size S
-                                            </option>
-                                            <option @if ($size->m == '' || $size->m == 0) disabled @endif value="m">Size M
-                                            </option>
-                                            <option @if ($size->l == '' || $size->l == 0) disabled @endif value="l">Size L
-                                            </option>
-                                            <option @if ($size->xl == '' || $size->xl == 0) disabled @endif value="xl">Size XL
-                                            </option>
-                                            <option @if ($size->xxl == '' || $size->xxl == 0) disabled @endif value="xxl">Size
-                                                XXL</option>
-                                            <option @if ($size->allsize == '' || $size->allsize == 0) disabled @endif value="allsize">All
-                                                Size</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
+                                    <div class="rs1-select2 bg0">
+                                        <div class="flex-w size-217">
+                                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 active-product">
+                                                Streetstyle
+                                            </a>
+
+                                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                                Crafts
+                                            </a>
+                                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                                Crafts
+                                            </a>
+                                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                                Crafts
+                                            </a>
+                                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                                Crafts
+                                            </a>
+                                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                                Crafts
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

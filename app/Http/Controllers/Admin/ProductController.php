@@ -45,6 +45,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $validator = Validator::make($request->all(), [
             'title' => 'required'
         ]);
@@ -53,23 +54,158 @@ class ProductController extends Controller
             return back()->withErrors($validator->errors())->withInput();
         }
 
+        // size S
+        if ($request->s != '' || $request->s != null) {
             $image_path = '';
-        if ($request->hasFile('photo')) {
-            $image_path = $request->file('photo')->store('products', 'public');
+            if ($request->hasFile('photo')) {
+                $image_path = $request->file('photo')->store('products', 'public');
+            }
+            // dd('here');
+            // dd(Str::slug($request->title) . '-s');
+
+            $produk = Product::create([
+                'title' => $request->title,
+                'slug' => Str::slug($request->title) . '-s',
+                'summary' => $request->summary,
+                'description' => $request->description,
+                'photo' => $image_path,
+                'stock' => $request->s,
+                'size' => 's',
+                'price' => $request->price,
+                'discount_price' => $request->discount_price,
+                'status' => 'show',
+                'category_id' => $request->category_id,
+                'brand_id' => $request->brand_id,
+            ]);
         }
 
-        $produk = Product::create([
-            'title' => $request->title,
-            'slug' => Str::slug($request->title),
-            'summary' => $request->summary,
-            'description' => $request->description,
-            'photo' => $image_path,
-            'price' => $request->price,
-            'discount_price' => $request->discount_price,
-            'status' => 'show',
-            'category_id' => $request->category_id,
-            'brand_id' => $request->brand_id,
-        ]);
+        // size M
+        if ($request->m != '' || $request->m != null) {
+            $image_path_m = '';
+            if ($request->hasFile('photo')) {
+                $image_path_m = $request->file('photo')->store('products', 'public');
+            }
+            // dd('here');
+            // dd(Str::slug($request->title) . '-s');
+
+            $produk = Product::create([
+                'title' => $request->title,
+                'slug' => Str::slug($request->title) . '-m',
+                'summary' => $request->summary,
+                'description' => $request->description,
+                'photo' => $image_path_m,
+                'stock' => $request->m,
+                'size' => 'm',
+                'price' => $request->price,
+                'discount_price' => $request->discount_price,
+                'status' => 'show',
+                'category_id' => $request->category_id,
+                'brand_id' => $request->brand_id,
+            ]);
+        }
+
+        // size L
+        if ($request->l != '' || $request->l != null) {
+            $image_path_l = '';
+            if ($request->hasFile('photo')) {
+                $image_path_l = $request->file('photo')->store('products', 'public');
+            }
+            // dd('here');
+            // dd(Str::slug($request->title) . '-s');
+
+            $produk = Product::create([
+                'title' => $request->title,
+                'slug' => Str::slug($request->title) . '-l',
+                'summary' => $request->summary,
+                'description' => $request->description,
+                'photo' => $image_path_l,
+                'stock' => $request->l,
+                'size' => 'l',
+                'price' => $request->price,
+                'discount_price' => $request->discount_price,
+                'status' => 'show',
+                'category_id' => $request->category_id,
+                'brand_id' => $request->brand_id,
+            ]);
+        }
+
+        // size xl
+        if ($request->xl != '' || $request->xl != null) {
+            $image_path_xl = '';
+            if ($request->hasFile('photo')) {
+                $image_path_xl = $request->file('photo')->store('products', 'public');
+            }
+            // dd('here');
+            // dd(Str::slug($request->title) . '-s');
+
+            $produk = Product::create([
+                'title' => $request->title,
+                'slug' => Str::slug($request->title) . '-xl',
+                'summary' => $request->summary,
+                'description' => $request->description,
+                'photo' => $image_path_xl,
+                'stock' => $request->xl,
+                'size' => 'xl',
+                'price' => $request->price,
+                'discount_price' => $request->discount_price,
+                'status' => 'show',
+                'category_id' => $request->category_id,
+                'brand_id' => $request->brand_id,
+            ]);
+        }
+
+        // size xxl
+        if ($request->xxl != '' || $request->xxl != null) {
+            $image_path_xxl = '';
+            if ($request->hasFile('photo')) {
+                $image_path_xxl = $request->file('photo')->store('products', 'public');
+            }
+            // dd('here');
+            // dd(Str::slug($request->title) . '-s');
+
+            $produk = Product::create([
+                'title' => $request->title,
+                'slug' => Str::slug($request->title) . '-xxl',
+                'summary' => $request->summary,
+                'description' => $request->description,
+                'photo' => $image_path_xxl,
+                'stock' => $request->xxl,
+                'size' => 'xxl',
+                'price' => $request->price,
+                'discount_price' => $request->discount_price,
+                'status' => 'show',
+                'category_id' => $request->category_id,
+                'brand_id' => $request->brand_id,
+            ]);
+        }
+
+        // size allsize
+        if ($request->allsize != '' || $request->allsize != null) {
+            $image_path_allsize = '';
+            if ($request->hasFile('photo')) {
+                $image_path_allsize = $request->file('photo')->store('products', 'public');
+            }
+            // dd('here');
+            // dd(Str::slug($request->title) . '-s');
+
+            $produk = Product::create([
+                'title' => $request->title,
+                'slug' => Str::slug($request->title) . '-allsize',
+                'summary' => $request->summary,
+                'description' => $request->description,
+                'photo' => $image_path_allsize,
+                'stock' => $request->allsize,
+                'size' => 'allsize',
+                'price' => $request->price,
+                'discount_price' => $request->discount_price,
+                'status' => 'show',
+                'category_id' => $request->category_id,
+                'brand_id' => $request->brand_id,
+            ]);
+        }
+
+
+
 
 
         SizeAvailableProduct::create([
@@ -178,6 +314,8 @@ class ProductController extends Controller
         $product = Product::where('id', '=', $id)->first();
         $size = SizeAvailableProduct::where('product_id', '=', $id)->first();
         $related = Product::take(4)->get();
+
+
         return view('frontend.productDetail', compact('product', 'brand', 'related', 'size'));
     }
 }

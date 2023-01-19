@@ -113,16 +113,33 @@ class CartController extends Controller
                             ->where('order_log.status', '=', 'open')->orderBy('orders.created_at','DESC')->first();
             // dd($orderExist);
 
-            $cartExist = Cart::create([
-                'product_id' => $product->id,
-                'order_id' => $orderExist->id,
-                'user_id' => $user->id,
-                'price' => $request->price,
-                'quantity' => $request->quantity
-            ]);
+            $check_cart = Cart::where('product_id', '=', $request->id)
+                            ->where('order_id', '=', $orderExist->id)->first();
 
-            request()->session()->flash('success','Product successfully added to cart');
-            return back();
+            // dd($check_cart);
+
+            if ($check_cart != '' || $check_cart != null) {
+                $check_cart->update([
+                    'product_id' => $product->id,
+                    'order_id' => $orderExist->id,
+                    'user_id' => $user->id,
+                    'price' => $request->price,
+                    'quantity' => $request->quantity
+                ]);
+            } else {
+                $cartExist = Cart::create([
+                    'product_id' => $product->id,
+                    'order_id' => $orderExist->id,
+                    'user_id' => $user->id,
+                    'price' => $request->price,
+                    'quantity' => $request->quantity
+                ]);
+
+                request()->session()->flash('success','Product successfully added to cart');
+                return back();
+            }
+
+
 
         }
     }
