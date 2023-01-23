@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->integer('stock')->nullable();
             $table->string('size')->nullable();
-            $table->string('condition')->nullable();
             $table->string('status')->nullable();
             $table->double('price')->nullable();
             $table->double('discount_price')->nullable();

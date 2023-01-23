@@ -24,7 +24,7 @@ class ProductController extends Controller
     {
         $products = ShowDataProduct::join('products', 'products.product_id', '=', 'show_data_products.id')->get();
         // $products = Product::join('show_data_products', 'show_data_products.id', '=', 'products.product_id')->first();
-        dd($products);
+        // dd($products);
         return view('admin.product.index', compact('products'));
     }
 
@@ -68,34 +68,28 @@ class ProductController extends Controller
             'summary' => $request->summary,
             'description' => $request->description,
             'photo' => $image_path_master,
-            // 'stock' => $request->s,
-            // 'size' => 's',
-            // 'price' => $request->price,
-            // 'discount_price' => $request->discount_price,
-            // 'status' => 'show',
             'category_id' => $request->category_id,
             'brand_id' => $request->brand_id,
+            'price' => $request->price,
+            'status' => 'show',
+            'discount_price' => $request->discount_price,
         ]);
 
         // size S
         if ($request->s != '' || $request->s != null) {
-            // $image_path = '';
-            // if ($request->hasFile('photo')) {
-            //     $image_path = $request->file('photo')->store('products', 'public');
-            // }
 
             $produk = Product::create([
                 'title' => $request->title,
                 'slug' => Str::slug($request->title) . '-s',
+                'stock' => $request->s,
+                'size' => 's',
+                'status' => 'show',
+                'product_id' => $masterProduk->id
+                // 'price' => $request->price,
+                // 'discount_price' => $request->discount_price,
                 // 'summary' => $request->summary,
                 // 'description' => $request->description,
                 // 'photo' => $image_path,
-                'stock' => $request->s,
-                'size' => 's',
-                'price' => $request->price,
-                'discount_price' => $request->discount_price,
-                'status' => 'show',
-                'product_id' => $masterProduk->id
                 // 'category_id' => $request->category_id,
                 // 'brand_id' => $request->brand_id,
             ]);
@@ -111,15 +105,15 @@ class ProductController extends Controller
             $produk = Product::create([
                 'title' => $request->title,
                 'slug' => Str::slug($request->title) . '-m',
+                'stock' => $request->m,
+                'size' => 'm',
+                'status' => 'show',
+                'product_id' => $masterProduk->id
+                // 'price' => $request->price,
+                // 'discount_price' => $request->discount_price,
                 // 'summary' => $request->summary,
                 // 'description' => $request->description,
                 // 'photo' => $image_path_m,
-                'stock' => $request->m,
-                'size' => 'm',
-                'price' => $request->price,
-                'discount_price' => $request->discount_price,
-                'status' => 'show',
-                'product_id' => $masterProduk->id
                 // 'category_id' => $request->category_id,
                 // 'brand_id' => $request->brand_id,
             ]);
@@ -135,15 +129,15 @@ class ProductController extends Controller
             $produk = Product::create([
                 'title' => $request->title,
                 'slug' => Str::slug($request->title) . '-l',
+                'stock' => $request->l,
+                'size' => 'l',
+                'status' => 'show',
+                'product_id' => $masterProduk->id
+                // 'price' => $request->price,
+                // 'discount_price' => $request->discount_price,
                 // 'summary' => $request->summary,
                 // 'description' => $request->description,
                 // 'photo' => $image_path_l,
-                'stock' => $request->l,
-                'size' => 'l',
-                'price' => $request->price,
-                'discount_price' => $request->discount_price,
-                'status' => 'show',
-                'product_id' => $masterProduk->id
                 // 'category_id' => $request->category_id,
                 // 'brand_id' => $request->brand_id,
             ]);
@@ -159,15 +153,15 @@ class ProductController extends Controller
             $produk = Product::create([
                 'title' => $request->title,
                 'slug' => Str::slug($request->title) . '-xl',
+                'stock' => $request->xl,
+                'size' => 'xl',
+                'status' => 'show',
+                'product_id' => $masterProduk->id
+                // 'price' => $request->price,
+                // 'discount_price' => $request->discount_price,
                 // 'summary' => $request->summary,
                 // 'description' => $request->description,
                 // 'photo' => $image_path_xl,
-                'stock' => $request->xl,
-                'size' => 'xl',
-                'price' => $request->price,
-                'discount_price' => $request->discount_price,
-                'status' => 'show',
-                'product_id' => $masterProduk->id
                 // 'category_id' => $request->category_id,
                 // 'brand_id' => $request->brand_id,
             ]);
@@ -183,15 +177,15 @@ class ProductController extends Controller
             $produk = Product::create([
                 'title' => $request->title,
                 'slug' => Str::slug($request->title) . '-xxl',
+                'stock' => $request->xxl,
+                'size' => 'xxl',
+                'status' => 'show',
+                'product_id' => $masterProduk->id
+                // 'price' => $request->price,
+                // 'discount_price' => $request->discount_price,
                 // 'summary' => $request->summary,
                 // 'description' => $request->description,
                 // 'photo' => $image_path_xxl,
-                'stock' => $request->xxl,
-                'size' => 'xxl',
-                'price' => $request->price,
-                'discount_price' => $request->discount_price,
-                'status' => 'show',
-                'product_id' => $masterProduk->id
                 // 'category_id' => $request->category_id,
                 // 'brand_id' => $request->brand_id,
             ]);
@@ -207,15 +201,15 @@ class ProductController extends Controller
             $produk = Product::create([
                 'title' => $request->title,
                 'slug' => Str::slug($request->title) . '-allsize',
+                'stock' => $request->allsize,
+                'size' => 'allsize',
+                'status' => 'show',
+                'product_id' => $masterProduk->id
+                // 'price' => $request->price,
+                // 'discount_price' => $request->discount_price,
                 // 'summary' => $request->summary,
                 // 'description' => $request->description,
                 // 'photo' => $image_path_allsize,
-                'stock' => $request->allsize,
-                'size' => 'allsize',
-                'price' => $request->price,
-                'discount_price' => $request->discount_price,
-                'status' => 'show',
-                'product_id' => $masterProduk->id
                 // 'category_id' => $request->category_id,
                 // 'brand_id' => $request->brand_id,
             ]);
