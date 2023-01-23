@@ -7,7 +7,14 @@
     </div>
     <ul class="sidebar-menu">
       <li><a class="nav-link" href="{{ route('admin-dashboard-index') }}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
-      <li><a class="nav-link" href="{{ route('product.index') }}"><i class="far fa-file-alt"></i> <span>Products</span></a></li>
+      <li class="dropdown">
+        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Products</span></a>
+        <ul class="dropdown-menu" style="display: none;">
+          <li><a class="nav-link" href="{{ route('product.index') }}">Master Product</a></li>
+          <li><a class="nav-link" href="#">Product Satuan</a></li>
+        </ul>
+      </li>
+      {{-- <li><a class="nav-link" href="{{ route('product.index') }}"><i class="far fa-file-alt"></i> <span>Products</span></a></li> --}}
       <li><a class="nav-link" href="{{ route('category.index') }}"><i class="far fa-file-alt"></i> <span>Category</span></a></li>
       <li><a class="nav-link" href="{{ route('coupon.index') }}"><i class="far fa-file-alt"></i> <span>Coupons</span></a></li>
       <li><a class="nav-link" href="{{ route('brand.index') }}"><i class="far fa-file-alt"></i> <span>Brands</span></a></li>

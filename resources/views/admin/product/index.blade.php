@@ -25,7 +25,7 @@
                                         <th>Nama</th>
                                         <th>Slug</th>
                                         <th>Photo</th>
-                                        <th>Stok</th>
+                                        {{-- <th>Stok</th> --}}
                                         <th>Harga</th>
                                         <th>Harga Diskon</th>
                                         <th>Action</th>
@@ -41,7 +41,7 @@
                                             <td>{{ $val->title }}</td>
                                             <td>{{ $val->slug }}</td>
                                             <td><img src="{{ Storage::url('public/').$val->photo }}" class="rounded" style="width: 100px"></td>
-                                            <td>{{ $val->stock }}</td>
+                                            {{-- <td>{{ $val->stock }}</td> --}}
                                             <td>{{ $val->price }}</td>
                                             <td>{{ $val->discount }}</td>
                                             <td>

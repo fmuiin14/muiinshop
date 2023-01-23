@@ -38,24 +38,48 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Size</span>
                                     </div>
-                                    <input type="text" class="form-control" name="s"
+                                    <input type="text" class="form-control" name="s" @if ($products->size != 's')
+                                        readonly
+                                    @endif
                                         onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
-                                        placeholder="S" value="{{ $size->s }}">
-                                    <input type="text" class="form-control" name="m"
+                                        placeholder="S" @if ($products->size == 's')
+                                        value="{{ $products->stock }}"
+                                    @else value=""  @endif>
+                                    <input type="text" class="form-control" name="m" @if ($products->size != 'm')
+                                    readonly
+                                @endif
                                         onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
-                                        placeholder="M" value="{{ $size->m }}">
-                                    <input type="text" class="form-control" name="l"
+                                        placeholder="M" @if ($products->size == 'm')
+                                        value="{{ $products->stock }}"
+                                    @else value=""  @endif>
+                                    <input type="text" class="form-control" name="l" @if ($products->size != 'l')
+                                    readonly
+                                @endif
                                         onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
-                                        placeholder="L" value="{{ $size->l }}">
-                                    <input type="text" class="form-control" name="xl"
+                                        placeholder="L" @if ($products->size == 'l')
+                                        value="{{ $products->stock }}"
+                                    @else value=""  @endif>
+                                    <input type="text" class="form-control" name="xl" @if ($products->size != 'xl')
+                                    readonly
+                                @endif
                                         onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
-                                        placeholder="XL" value="{{ $size->xl }}">
-                                    <input type="text" class="form-control" name="xxl"
+                                        placeholder="XL" @if ($products->size == 'xl')
+                                        value="{{ $products->stock }}"
+                                    @else value=""  @endif>
+                                    <input type="text" class="form-control" name="xxl" @if ($products->size != 'xxl')
+                                    readonly
+                                @endif
                                         onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
-                                        placeholder="XXL" value="{{ $size->xxl }}">
-                                    <input type="text" class="form-control" name="allsize"
+                                        placeholder="XXL" @if ($products->size == 'xxl')
+                                        value="{{ $products->stock }}"
+                                    @else value=""  @endif>
+                                    <input type="text" class="form-control" name="allsize" @if ($products->size != 'allsize')
+                                    readonly
+                                @endif
                                         onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
-                                        placeholder="Allsize" value="{{ $size->allsize }}">
+                                        placeholder="Allsize" @if ($products->size == 'allsize')
+                                        value="{{ $products->stock }}"
+                                    @else value=""  @endif>
                                 </div>
                             </div>
 
