@@ -13,7 +13,7 @@
                     <div class="card-header">
                         <h4>Data Produk</h4>
                         <div class="card-header-action">
-                            {{-- <a href="{{ route('product.create') }}" class="btn btn-primary btn-sm">Tambah Produk</a> --}}
+                            <a href="{{ route('product.create') }}" class="btn btn-primary btn-sm">Tambah Produk</a>
                         </div>
                     </div>
                     <div class="card-body">

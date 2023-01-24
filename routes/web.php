@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\MasterProductController;
 
 Route::get('/', [FrontendController::class, 'index'])->name('homefe');
 Route::get('/product/{slug}/{id}', [ProductController::class, 'detail']);
+Route::get('/product/{slug}/{size}/{id}', [ProductController::class, 'satuanDetail']);
 
 
 

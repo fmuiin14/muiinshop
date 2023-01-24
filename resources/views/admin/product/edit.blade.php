@@ -97,8 +97,8 @@
                                     value="{{ $products->price }}">
                             </div> --}}
                             <div class="form-group">
-                                <label>Harga Satuan</label>
-                                <input type="text" class="form-control" name="discount" required
+                                <label>Harga Diskon Satuan</label>
+                                <input type="text" class="form-control" name="discount_price"
                                     value="{{ $products->discount_price }}">
                             </div>
                             {{-- <div class="form-group">

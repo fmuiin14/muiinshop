@@ -13,7 +13,7 @@
                     <div class="card-header">
                         <h4>Edit Produk</h4>
                         <div class="card-header-action">
-                            <a href="{{ route('productMaster.index') }}" class="btn btn-primary btn-sm">Kembali</a>
+                            <a href="{{ route('masterProduct.index') }}" class="btn btn-primary btn-sm">Kembali</a>
                         </div>
                     </div>
 
@@ -23,17 +23,17 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('product.update', $products->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('masterProduct.update', $products->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Nama</label>
-                                <input type="text" class="form-control" name="title" required
+                                <input type="text" readonly class="form-control" name="title" required
                                     value="{{ $products->title }}">
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Size</span>
@@ -81,7 +81,7 @@
                                         value="{{ $products->stock }}"
                                     @else value=""  @endif>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group">
                                 <label>Summary</label>
@@ -98,7 +98,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Harga Diskon</label>
-                                <input type="text" class="form-control" name="discount" required
+                                <input type="text" class="form-control" name="discount_price" required
                                     value="{{ $products->discount_price }}">
                             </div>
                             <div class="form-group">
@@ -130,7 +130,7 @@
                                 @endif
                                 <br>
                                 <small>*Ignore if you don't want to change the image</small>
-                                <input type="file" class="form-control" name="photo" required>
+                                <input type="file" class="form-control" name="photo">
                             </div>
                         </div>
                         <div class="card-footer text-right">

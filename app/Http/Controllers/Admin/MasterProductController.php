@@ -109,14 +109,14 @@ class MasterProductController extends Controller
             $image_path = $request->file('photo')->store('products', 'public');
 
             //delete old image
-            // Storage::delete('public/'.$products->photo);
+            Storage::delete('public/'.$products->photo);
 
             $products->update([
-                'image'     => $image_path
+                'photo'     => $image_path
             ]);
         }
 
-        return redirect()->route('productsMaster.index')->with('success', 'Data Berhasil Diupdate!');
+        return redirect()->route('masterProduct.index')->with('success', 'Data Berhasil Diupdate!');
     }
 
     /**

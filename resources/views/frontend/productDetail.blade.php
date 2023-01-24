@@ -87,23 +87,6 @@
                                 <input type="hidden" value="{{ $product->slug }}" name="slug">
                                 <input type="hidden" value="{{ $product->price }}" name="price">
 
-
-                                {{-- <div class="flex-w flex-t p-t-16">
-                                    <span class="size-216 stext-116 cl8 p-t-4">
-                                        Ukuran
-                                    </span>
-
-                                    <div class="flex-w size-217">
-                                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                            Streetstyle
-                                        </a>
-
-                                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                            Crafts
-                                        </a>
-                                    </div>
-                                </div> --}}
-
                                 <div class="size-203 flex-c-m respon6">
                                     Ukuran
                                 </div>
@@ -111,25 +94,13 @@
                                 <div class="size-204 respon6-next">
                                     <div class="rs1-select2 bg0">
                                         <div class="flex-w size-217">
-                                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 active-product">
-                                                Streetstyle
-                                            </a>
 
-                                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                                Crafts
+                                            @foreach ($selectedProduct as $item)
+                                            <a href="{{ url('product/' . $item->slug . '/' . $item->size) . '/' . $item->id }}" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                                {{ $item->size }}
                                             </a>
-                                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                                Crafts
-                                            </a>
-                                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                                Crafts
-                                            </a>
-                                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                                Crafts
-                                            </a>
-                                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                                Crafts
-                                            </a>
+                                            @endforeach
+
                                         </div>
                                     </div>
                                 </div>

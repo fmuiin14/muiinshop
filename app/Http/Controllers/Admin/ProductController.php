@@ -22,7 +22,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = ShowDataProduct::select('p.id', 'p.title', 'p.slug', 'p.size', 'p.stock', 'p.price as priceproduct', 'show_data_products.price as pricemaster', 'p.discount_price as discount_price_product', 'show_data_products.discount_price as discount_price_master', 'show_data_products.summary', 'show_data_products.description', 'show_data_products.photo')
+        $products = ShowDataProduct::select('p.id', 'p.title', 'p.slug', 'p.size', 'p.stock', 'show_data_products.price as pricemaster', 'p.discount_price as discount_price_product', 'show_data_products.discount_price as discount_price_master', 'show_data_products.summary', 'show_data_products.description', 'show_data_products.photo')
                         ->join('products AS p', 'p.product_id', '=', 'show_data_products.id')->get();
         // $products = Product::join('show_data_products', 'show_data_products.id', '=', 'products.product_id')->first();
         // dd($products);
@@ -266,9 +266,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request);
         $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'price' => 'required'
+            'title' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -277,16 +277,33 @@ class ProductController extends Controller
 
         $products = Product::findOrFail($id);
 
+        $stock = '';
+
+        if ($request->s != '' || $request->s != null) {
+            $stock = $request->s;
+        } elseif ($request->m != '' || $request->m != null) {
+            $stock = $request->m;
+        } elseif ($request->l != '' || $request->l != null) {
+            $stock = $request->l;
+        } elseif ($request->xl != '' || $request->xl != null) {
+            $stock = $request->xl;
+        } elseif ($request->xxl != '' || $request->xxl != null) {
+            $stock = $request->xxl;
+        } elseif ($request->allsize != '' || $request->allsize != null) {
+            $stock = $request->allsize;
+        }
+
+
         $products->update([
             'title' => $request->title,
             'slug' => Str::slug($request->title),
-            'summary' => $request->summary,
-            'description' => $request->description,
-            'stock' => $request->stock,
-            'price' => $request->price,
+            // 'summary' => $request->summary,
+            // 'description' => $request->description,
+            'stock' => $stock,
+            // 'price' => $request->price,
             'discount_price' => $request->discount_price,
-            'category_id' => $request->category_id,
-            'brand_id' => $request->brand_id
+            // 'category_id' => $request->category_id,
+            // 'brand_id' => $request->brand_id
         ]);
 
         if ($request->hasFile('photo')) {
@@ -300,7 +317,7 @@ class ProductController extends Controller
             ]);
         }
 
-        return redirect()->route('products.index')->with('success', 'Data Berhasil Diupdate!');
+        return redirect()->route('product.index')->with('success', 'Data Berhasil Diupdate!');
     }
 
     /**
@@ -312,10 +329,10 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $item = Product::findOrFail($id);
-        Storage::delete('public/'.$item->image);
+        // Storage::delete('public/'.$item->image);
         $item->delete();
 
-        SizeAvailableProduct::where('product_id',$id)->delete();
+        // SizeAvailableProduct::where('product_id',$id)->delete();
 
         return redirect()->route('product.index')->with('success', 'Data Berhasil Dihapus!');
     }
@@ -323,11 +340,15 @@ class ProductController extends Controller
     public function detail ($slug, $id)
     {
         $brand = Brand::all();
-        $product = Product::where('id', '=', $id)->first();
-        $size = SizeAvailableProduct::where('product_id', '=', $id)->first();
-        $related = Product::take(4)->get();
+        $product = ShowDataProduct::where('id', '=', $id)->first();
+        $related = ShowDataProduct::take(4)->where('id', '!=', $id)->get();
 
+        $selectedProduct = Product::select('size', 'slug', 'id')->where('product_id', '=', $id)->get();
 
-        return view('frontend.productDetail', compact('product', 'brand', 'related', 'size'));
+        return view('frontend.productDetail', compact('product', 'brand', 'related', 'selectedProduct'));
+    }
+
+    public function satuanDetail($slug, $size, $id) {
+        dd($slug, $size, $id);
     }
 }

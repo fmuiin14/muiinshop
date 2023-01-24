@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Slider;
-use App\Models\Product;
+use App\Models\ShowDataProduct;
 
 class FrontendController extends Controller
 {
@@ -12,7 +12,7 @@ class FrontendController extends Controller
         $brand = Brand::all();
         $slider = Slider::all();
         $brand = Brand::all();
-        $product = Product::all();
+        $product = ShowDataProduct::all();
         return view('frontend.index', compact('brand', 'slider', 'brand', 'product'));
     }
 }

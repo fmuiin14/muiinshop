@@ -12,9 +12,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h4>Data Produk</h4>
-                        <div class="card-header-action">
+                        {{-- <div class="card-header-action">
                             <a href="{{ route('product.create') }}" class="btn btn-primary btn-sm">Tambah Produk</a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -42,12 +42,12 @@
                                             <td>{{ $val->slug }}</td>
                                             <td><img src="{{ Storage::url('public/').$val->photo }}" class="rounded" style="width: 100px"></td>
                                             {{-- <td>{{ $val->stock }}</td> --}}
-                                            <td>@if ($val->priceproduct != '')
-                                                {{ $val->priceproduct }}
+                                            <td>{{ $val->pricemaster }}</td>
+                                            <td>@if ($val->discount_price_product != '')
+                                                {{ $val->discount_price_product }}
                                                 @else
-                                                {{ $val->pricemaster }}
+                                                {{ $val->discount_price_master }}
                                             @endif</td>
-                                            <td>{{ $val->discount }}</td>
                                             <td>
                                                 <form onsubmit="return confirm('Are you sure?')" action="{{ route('product.destroy', $val->id) }}" method="POST">
                                                     @csrf
