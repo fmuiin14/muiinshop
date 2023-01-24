@@ -13,7 +13,7 @@
                     <div class="card-header">
                         <h4>Edit Produk</h4>
                         <div class="card-header-action">
-                            <a href="{{ route('product.index') }}" class="btn btn-primary btn-sm">Kembali</a>
+                            <a href="{{ route('productMaster.index') }}" class="btn btn-primary btn-sm">Kembali</a>
                         </div>
                     </div>
 
@@ -83,25 +83,25 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="form-group">
+                            <div class="form-group">
                                 <label>Summary</label>
-                                <textarea readonly name="summary" class="form-control">{{ $products->summary }}</textarea>
+                                <textarea name="summary" class="form-control">{{ $products->summary }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea readonly name="description" class="form-control">{{ $products->description }}</textarea>
-                            </div> --}}
-                            {{-- <div class="form-group">
+                                <textarea name="description" class="form-control">{{ $products->description }}</textarea>
+                            </div>
+                            <div class="form-group">
                                 <label>Harga</label>
                                 <input type="text" class="form-control" name="price" required
                                     value="{{ $products->price }}">
-                            </div> --}}
+                            </div>
                             <div class="form-group">
-                                <label>Harga Satuan</label>
+                                <label>Harga Diskon</label>
                                 <input type="text" class="form-control" name="discount" required
                                     value="{{ $products->discount_price }}">
                             </div>
-                            {{-- <div class="form-group">
+                            <div class="form-group">
                                 <label>Kategori</label>
                                 <select name="category_id" class="form-control">
                                     @foreach ($category as $val)
@@ -120,8 +120,8 @@
                                         @endif>{{ $val->title }}</option>
                                     @endforeach
                                 </select>
-                            </div> --}}
-                            {{-- <div class="form-group mb-0">
+                            </div>
+                            <div class="form-group mb-0">
                                 <label for="">Photo</label>
                                 <br>
                                 @if ($products->photo != '')
@@ -131,7 +131,7 @@
                                 <br>
                                 <small>*Ignore if you don't want to change the image</small>
                                 <input type="file" class="form-control" name="photo" required>
-                            </div> --}}
+                            </div>
                         </div>
                         <div class="card-footer text-right">
                             <button class="btn btn-primary">Submit</button>

@@ -22,7 +22,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = ShowDataProduct::join('products', 'products.product_id', '=', 'show_data_products.id')->get();
+        $products = ShowDataProduct::select('p.id', 'p.title', 'p.slug', 'p.size', 'p.stock', 'p.price as priceproduct', 'show_data_products.price as pricemaster', 'p.discount_price as discount_price_product', 'show_data_products.discount_price as discount_price_master', 'show_data_products.summary', 'show_data_products.description', 'show_data_products.photo')
+                        ->join('products AS p', 'p.product_id', '=', 'show_data_products.id')->get();
         // $products = Product::join('show_data_products', 'show_data_products.id', '=', 'products.product_id')->first();
         // dd($products);
         return view('admin.product.index', compact('products'));
@@ -252,8 +253,8 @@ class ProductController extends Controller
         // dd($products);
         $category = Category::all();
         $brand = Brand::all();
-        $size = SizeAvailableProduct::where('product_id', '=', $id)->first();
-        return view('admin.product.edit', compact('products', 'category', 'brand', 'size'));
+        // $size = SizeAvailableProduct::where('product_id', '=', $id)->first();
+        return view('admin.product.edit', compact('products', 'category', 'brand'));
     }
 
     /**

@@ -10,8 +10,8 @@
       <li class="dropdown">
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Products</span></a>
         <ul class="dropdown-menu" style="display: none;">
-          <li><a class="nav-link" href="{{ route('product.index') }}">Master Product</a></li>
-          <li><a class="nav-link" href="#">Product Satuan</a></li>
+          <li><a class="nav-link" href="{{ route('masterProduct.index') }}">Master Product</a></li>
+          <li><a class="nav-link" href="{{ route('product.index') }}">Product Satuan</a></li>
         </ul>
       </li>
       {{-- <li><a class="nav-link" href="{{ route('product.index') }}"><i class="far fa-file-alt"></i> <span>Products</span></a></li> --}}

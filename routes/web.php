@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MasterProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
 Route::group(['prefix' => 'admin','middleware' => (['auth', 'role:admin'])], function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin-dashboard-index');
     Route::resource('product', ProductController::class);
+    Route::resource('masterProduct', MasterProductController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('coupon', CouponController::class);
     Route::resource('order', OrderController::class);

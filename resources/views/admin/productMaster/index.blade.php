@@ -13,7 +13,7 @@
                     <div class="card-header">
                         <h4>Data Produk</h4>
                         <div class="card-header-action">
-                            <a href="{{ route('product.create') }}" class="btn btn-primary btn-sm">Tambah Produk</a>
+                            {{-- <a href="{{ route('product.create') }}" class="btn btn-primary btn-sm">Tambah Produk</a> --}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -42,19 +42,15 @@
                                             <td>{{ $val->slug }}</td>
                                             <td><img src="{{ Storage::url('public/').$val->photo }}" class="rounded" style="width: 100px"></td>
                                             {{-- <td>{{ $val->stock }}</td> --}}
-                                            <td>@if ($val->priceproduct != '')
-                                                {{ $val->priceproduct }}
-                                                @else
-                                                {{ $val->pricemaster }}
-                                            @endif</td>
-                                            <td>{{ $val->discount }}</td>
+                                            <td>{{ $val->price }}</td>
+                                            <td>{{ $val->discount_price }}</td>
                                             <td>
-                                                <form onsubmit="return confirm('Are you sure?')" action="{{ route('product.destroy', $val->id) }}" method="POST">
+                                                <form onsubmit="return confirm('Are you sure?')" action="{{ route('masterProduct.destroy', $val->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                                 </form>
-                                                <a href="{{ route('product.edit', $val->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                                <a href="{{ route('masterProduct.edit', $val->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                             </td>
                                         </tr>
                                     @endforeach
