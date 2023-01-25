@@ -58,14 +58,15 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
         $user = Auth::user();
 
         if (empty($request->slug)) {
             request()->session()->flash('error','Invalid Products');
             return back();
         }
-        $product = Product::where('slug', $request->slug)->first();
+        $product = Product::where('id', $request->product_id_satuan)->first();
+        // dd($product);
         // return $product;
         if (empty($product)) {
             request()->session()->flash('error','Invalid Products');
@@ -88,8 +89,8 @@ class CartController extends Controller
 
                 $order = Order::create([
                 'order_number' => $order_nr,
-                'status' => 'open',
-                'user_id' => $user->id
+                'user_id' => $user->id,
+                'status' => 'open'
                 ]);
 
                 $order_log = OrderLog::create([
@@ -110,11 +111,13 @@ class CartController extends Controller
                 return back();
 
         } else {
+            // dd('kalo isi');
+            // dd($request);
             $orderExist = Order::join('order_log', 'order_log.order_id', '=', 'orders.id')
                             ->where('order_log.status', '=', 'open')->orderBy('orders.created_at','DESC')->first();
             // dd($orderExist);
 
-            $check_cart = Cart::where('product_id', '=', $request->id)
+            $check_cart = Cart::where('product_id', '=', $request->product_id_satuan)
                             ->where('order_id', '=', $orderExist->id)->first();
 
             // dd($check_cart);
@@ -125,7 +128,7 @@ class CartController extends Controller
                     'order_id' => $orderExist->id,
                     'user_id' => $user->id,
                     'price' => $request->price,
-                    'quantity' => $request->quantity
+                    'quantity' => $check_cart->quantity + $request->quantity
                 ]);
             } else {
                 $cartExist = Cart::create([
@@ -139,6 +142,8 @@ class CartController extends Controller
                 request()->session()->flash('success','Product successfully added to cart');
                 return back();
             }
+            request()->session()->flash('success','Product successfully added to cart');
+            return back();
 
 
 

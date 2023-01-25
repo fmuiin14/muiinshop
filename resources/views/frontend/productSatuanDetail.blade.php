@@ -93,7 +93,7 @@
                         <div class="p-t-33">
                             <div class="flex-w flex-r-m p-b-10">
                                 <input type="hidden" value="{{ $product->slug }}" name="slug">
-                                <input type="hidden" value="{{ $product->product_id }}" name="product_id">
+                                <input type="hidden" value="{{ $product->product_id_satuan }}" name="product_id_satuan">
                                 <input type="hidden" value="<?php
                                 if ($product->harga_produk_satuan_diskon != '' || $product->harga_produk_satuan_diskon != null) {
                                     echo $product->harga_produk_satuan_diskon;

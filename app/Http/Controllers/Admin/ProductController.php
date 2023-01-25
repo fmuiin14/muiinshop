@@ -349,12 +349,13 @@ class ProductController extends Controller
     }
 
     public function satuanDetail($slug, $size, $id) {
-        $product = Product::select('products.product_id', 'products.title', 'products.slug', 'products.stock', 'products.size', 'products.discount_price AS harga_produk_satuan_diskon', 'sdp.summary', 'sdp.description', 'sdp.photo', 'sdp.price AS price_master', 'sdp.discount_price AS harga_produk_diskon_master')
+        $product = Product::select('products.product_id', 'products.title','products.id AS product_id_satuan', 'products.slug', 'products.stock', 'products.size', 'products.discount_price AS harga_produk_satuan_diskon', 'sdp.summary', 'sdp.description', 'sdp.photo', 'sdp.price AS price_master', 'sdp.discount_price AS harga_produk_diskon_master', 'sdp.id AS id_master')
                     ->join('show_data_products AS sdp', 'sdp.id', '=', 'products.product_id')
                     ->where('products.id', '=', $id)->first();
                     // dd($product);
         $brand = Brand::all();
-        $related = ShowDataProduct::take(4)->where('id', '!=', $id)->get();
+        $related = ShowDataProduct::take(4)->where('id', '!=', $product->id_master)->get();
+        // dd($related);
 
         $selectedProduct = Product::select('size', 'slug', 'id')->where('product_id', '=', $product->product_id)->get();
 
