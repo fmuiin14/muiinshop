@@ -349,6 +349,15 @@ class ProductController extends Controller
     }
 
     public function satuanDetail($slug, $size, $id) {
-        dd($slug, $size, $id);
+        $product = Product::select('products.product_id', 'products.title', 'products.slug', 'products.stock', 'products.size', 'products.discount_price AS harga_produk_satuan_diskon', 'sdp.summary', 'sdp.description', 'sdp.photo', 'sdp.price AS price_master', 'sdp.discount_price AS harga_produk_diskon_master')
+                    ->join('show_data_products AS sdp', 'sdp.id', '=', 'products.product_id')
+                    ->where('products.id', '=', $id)->first();
+                    // dd($product);
+        $brand = Brand::all();
+        $related = ShowDataProduct::take(4)->where('id', '!=', $id)->get();
+
+        $selectedProduct = Product::select('size', 'slug', 'id')->where('product_id', '=', $product->product_id)->get();
+
+        return view('frontend.productSatuanDetail', compact('product', 'brand', 'related', 'selectedProduct'));
     }
 }

@@ -73,7 +73,15 @@
                         </h4>
 
                         <span class="mtext-106 cl2">
-                            {{ $product->price }}
+                            <?php
+                                if ($product->harga_produk_satuan_diskon != '' || $product->harga_produk_satuan_diskon != null) {
+                                    echo $product->harga_produk_satuan_diskon;
+                                } elseif ($product->harga_produk_diskon_master != '' || $product->harga_produk_diskon_master != null) {
+                                    echo $product->harga_produk_diskon_master;
+                                } else {
+                                    echo $product->price_master;
+                                }
+                            ?>
                         </span>
 
                         <p class="stext-102 cl3 p-t-23">
@@ -85,7 +93,16 @@
                         <div class="p-t-33">
                             <div class="flex-w flex-r-m p-b-10">
                                 <input type="hidden" value="{{ $product->slug }}" name="slug">
-                                <input type="hidden" value="{{ $product->price }}" name="price">
+                                <input type="hidden" value="{{ $product->product_id }}" name="product_id">
+                                <input type="hidden" value="<?php
+                                if ($product->harga_produk_satuan_diskon != '' || $product->harga_produk_satuan_diskon != null) {
+                                    echo $product->harga_produk_satuan_diskon;
+                                } elseif ($product->harga_produk_diskon_master != '' || $product->harga_produk_diskon_master != null) {
+                                    echo $product->harga_produk_diskon_master;
+                                } else {
+                                    echo $product->price_master;
+                                }
+                            ?>" name="price">
 
                                 <div class="size-203 flex-c-m respon6">
                                     Ukuran
@@ -96,7 +113,7 @@
                                         <div class="flex-w size-217">
 
                                             @foreach ($selectedProduct as $item)
-                                            <a href="{{ url('product/' . $item->slug . '/' . $item->size) . '/' . $item->id }}" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                            <a href="{{ url('product/' . $item->slug . '/' . $item->size) . '/' . $item->id }}" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 <?php if ($product->size == $item->size) { echo 'active-product';} ?>">
                                                 {{ $item->size }}
                                             </a>
                                             @endforeach
@@ -114,7 +131,7 @@
                                         </div>
 
                                         <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                            name="quantity" id="totaljumlah" min="1" max="50" value="1">
+                                            name="quantity" id="totaljumlah" onkeyup="if (event.srcElement.value.charAt(0) == '0') { event.srcElement.value = event.srcElement.value.slice(1); }" min="1" max="50" value="1">
 
                                         <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                             <i class="fs-16 zmdi zmdi-plus"></i>
@@ -362,9 +379,6 @@
         if (AuthUser == null || AuthUser == '') {
             alert('Anda harus login/ register terlebih dahulu.');
             window.location = redirectLogin;
-            return false;
-        } else if ($("#ukuranPilihan").val() == null || $("#ukuranPilihan").val() == '') {
-            alert('Pilihan ukuran tidak boleh kosong.');
             return false;
         } else {
             swal(namaProduk, "is added to cart !", "success");
