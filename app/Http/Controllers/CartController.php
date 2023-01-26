@@ -22,22 +22,19 @@ class CartController extends Controller
         $user = Auth::user();
 
         $brand = Brand::all();
-        $cartproducts = Cart::join('order_log', 'order_log.order_id', '=', 'carts.order_id')
-                        ->join('orders', 'orders.id', '=', 'carts.order_id')
-                        ->where('order_log.status', '=', 'open')
-                        ->where('order_log.user_id', '=', $user->id)
-                        ->get()->toArray();;
-        var_dump($cartproducts); die;
-        // var_dump(json_decode($cartproducts)); die;
-        // $datas = json_decode(json_encode($cartproducts), true);
-        // var_dump(json_decode($datas)); die;
+        $getorder = Order::where('status', '=', 'open')->orderBy('created_at','DESC')->first();
+        $getcartdata = Cart::select('sdp.photo', 'p.title', 'p.discount_price', 'sdp.price', 'carts.quantity')
+                        ->join('products AS p', 'p.id', '=', 'carts.product_id')
+                        ->join('show_data_products AS sdp', 'sdp.id', '=', 'p.product_id')
+                        ->where('carts.order_id', '=', $getorder->id)->get();
+        // foreach ($getcartdata as $key) {
+        // // var_dump($key->price);
+        // // $datacart = Cart::
+        // }
+        // dd($getcartdata);
 
-        // foreach ($cartproducts as $val) {
-        //     var_dump($val);
-        //     die;
-        //     }
 
-        return view('frontend.cart', compact('brand'));
+        return view('frontend.cart', compact('brand', 'getcartdata'));
     }
 
     /**
