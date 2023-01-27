@@ -23,7 +23,7 @@ class CartController extends Controller
 
         $brand = Brand::all();
         $getorder = Order::where('status', '=', 'open')->orderBy('created_at','DESC')->first();
-        $getcartdata = Cart::select('sdp.photo', 'p.title', 'p.discount_price', 'sdp.price', 'carts.quantity')
+        $getcartdata = Cart::select('sdp.photo', 'p.title', 'p.discount_price', 'sdp.price', 'carts.quantity', 'p.id', 'carts.id AS cartid')
                         ->join('products AS p', 'p.id', '=', 'carts.product_id')
                         ->join('show_data_products AS sdp', 'sdp.id', '=', 'p.product_id')
                         ->where('carts.order_id', '=', $getorder->id)->get();
@@ -178,7 +178,14 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $carts = Cart::findOrFail($id);
+
+        $carts->update([
+            'quantity' => $request->quantity
+        ]);
+
+
+        return redirect()->route('cart.index')->with('success', 'Data Berhasil Diupdate!');
     }
 
     /**
@@ -189,7 +196,11 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // dd('Halo');
+        $item = Cart::findOrFail($id);
+        $item->delete();
+
+        return redirect()->route('cart.index')->with('success', 'Data Berhasil Dihapus!');
     }
 
 }
