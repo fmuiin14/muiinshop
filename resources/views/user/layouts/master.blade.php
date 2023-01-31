@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>@yield('title')</title>
 
   <!-- General CSS Files -->
@@ -18,16 +19,22 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('be/user/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('be/user/css/components.css') }}">
-<!-- Start GA -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'UA-94034622-3');
-</script>
-<!-- /END GA --></head>
+  <style>
+    .custom-select {
+    color: #495057;
+    line-height: normal;
+    }
+
+  </style>
+
+  <script src="{{ asset('be/user/modules/jquery.min.js') }}"></script>
+  <script src="{{ asset('be/user/modules/jquery.sparkline.min.js') }}"></script>
+  <script src="{{ asset('be/user/modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
+  <script src="{{ asset('be/user/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
 
 <body>
   <div id="app">
@@ -98,20 +105,16 @@
   </div>
 
   <!-- General JS Scripts -->
-  <script src="{{ asset('be/user/modules/jquery.min.js') }}"></script>
   <script src="{{ asset('be/user/modules/popper.js') }}"></script>
   <script src="{{ asset('be/user/modules/tooltip.js') }}"></script>
   <script src="{{ asset('be/user/modules/bootstrap/js/bootstrap.min.js') }}"></script>
-  <script src="{{ asset('be/user/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
   <script src="{{ asset('be/user/modules/moment.min.js') }}"></script>
   <script src="{{ asset('be/user/js/stisla.js') }}"></script>
 
   <!-- JS Libraies -->
-  <script src="{{ asset('be/user/modules/jquery.sparkline.min.js') }}"></script>
   <script src="{{ asset('be/user/modules/chart.min.js') }}"></script>
   <script src="{{ asset('be/user/modules/owlcarousel2/dist/owl.carousel.min.js') }}"></script>
   <script src="{{ asset('be/user/modules/summernote/summernote-bs4.js') }}"></script>
-  <script src="{{ asset('be/user/modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 
   <!-- Page Specific JS File -->
   {{-- <script src="{{ asset('be/user/js/page/index.js') }}"></script> --}}

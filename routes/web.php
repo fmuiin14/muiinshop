@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\DetailAlamatController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -34,7 +35,12 @@ Route::get('/product/{slug}/{size}/{id}', [ProductController::class, 'satuanDeta
 
 // Dashboard User
 Route::middleware(['auth'])->group(function () {
+    Route::resource('detailAlamat', DetailAlamatController::class);
     Route::get('/dashboard', [HomeController::class, 'index'])->name('user-dashboard');
+    Route::get('/dashboard/profile', [HomeController::class, 'profile'])->name('user-profile');
+    Route::post('/getKabupaten', [HomeController::class, 'getKabupaten'])->name('getKabupaten');
+    Route::post('/getKecamatan', [HomeController::class, 'getKecamatan'])->name('getKecamatan');
+    Route::post('/getKelurahan', [HomeController::class, 'getKelurahan'])->name('getKelurahan');
 
     // Cart
     Route::resource('cart', CartController::class);

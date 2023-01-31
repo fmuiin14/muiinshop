@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+use AzisHapidin\IndoRegion\IndoRegionServiceProvider;
 
 return [
 
@@ -194,6 +195,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        IndoRegionServiceProvider::class,
 
     ],
 
