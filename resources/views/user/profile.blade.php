@@ -10,12 +10,10 @@
 
     <div class="row">
         <div class="col-12 col-md-6 col-lg-6">
+
             <form action="{{ route('detailAlamat.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
         <div class="card">
-            <div class="card-header">
-              <h4>My Profile</h4>
-            </div>
             <div class="card-body">
               <div class="form-row">
                 <div class="form-group col-md-6">
@@ -26,6 +24,89 @@
                 <div class="form-group col-md-6">
                   <label for="inputEmail4">Email</label>
                   <input type="email" class="form-control" id="inputEmail4" placeholder="Email" value="{{ $user->email }}" readonly>
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="no_hp">No HP</label>
+                  <input type="text" class="form-control" name="no_hp" id="no_hp" placeholder="No HP">
+                </div>
+              </div>
+
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary">Submit</button>
+              </div>
+          </div>
+        </form>
+
+            <div class="card">
+              <div class="card-header">
+                <h4>Data Alamat</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered table-md">
+                    <tbody>
+                    <tr>
+                      <th>No</th>
+                      <th>Nama</th>
+                      <th>No HP</th>
+                      <th>Detail Alamat</th>
+                      <th>Action</th>
+                      <th>Status</th>
+                    </tr>
+
+                    @php
+                                        $no = 1;
+                                    @endphp
+                    @foreach ($alamats as $item)
+                    <tr>
+                      <td><?= $no++ ?></td>
+                      <td>{{ $item->nama_alamat }}</td>
+                      <td>{{ $item->no_hp }}</td>
+                      <td>{{ $item->detail_alamat }}</td>
+                      <td>
+                        <form onsubmit="return confirm('Are you sure?')" action="#" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                        <a href="#" class="btn btn-sm btn-primary">Edit</a>
+                      </td>
+                      <td>@if ($item->flag_alamat == 'utama')
+                        <div class="badge badge-success">utama</div>
+                      @else
+
+                      @endif</td>
+                    </tr>
+                    @endforeach
+
+                  </tbody>
+                </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        <div class="col-12 col-md-6 col-lg-6">
+            <form action="{{ route('detailAlamat.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+        <div class="card">
+            <div class="card-header">
+              <h4>Tambah Alamat Baru</h4>
+            </div>
+            <div class="card-body">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="name">Nama</label>
+                  <input type="hidden" name="id_user" value="{{ $user->id }}">
+                  <input type="text" class="form-control" id="name" placeholder="name" name="nama_alamat" value="">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputEmail4">Email</label>
+                  <input type="email" class="form-control" id="inputEmail4" placeholder="Email" value="" readonly>
                 </div>
                 <div class="form-group col-md-12">
                   <label for="no_hp">No HP</label>
@@ -71,7 +152,7 @@
             </div>
           </div>
         </form>
-    </div>
+        </div>
     </div>
 
   </section>

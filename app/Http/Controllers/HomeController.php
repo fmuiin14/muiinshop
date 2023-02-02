@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailAlamatUser;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\Regency;
@@ -35,8 +36,9 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $provinces = Province::all();
+        $alamats = DetailAlamatUser::where('id_user', '=', $user->id)->get();
 
-        return view('user.profile', compact('user', 'provinces'));
+        return view('user.profile', compact('user', 'provinces', 'alamats'));
     }
 
     public function getKabupaten( request $request) {

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('id_kabupaten')->nullable();
             $table->string('id_kecamatan')->nullable();
             $table->string('id_kelurahan')->nullable();
+            $table->string('flag_alamat')->nullable();
             $table->string('id_user')->nullable();
             $table->text('detail_alamat')->nullable();
             $table->timestamps();
